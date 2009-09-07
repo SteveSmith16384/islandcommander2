@@ -1,0 +1,31 @@
+Change colours of organactics sprites
+On IC2: Write you thoughts on the new balance more - it's not something I've been able to grasp - though Jumpers wiped everything out that survived the Nuke.
+
+
+LATER:
+Don't wait for each image to be loaded!
+Improve options screen
+Unpassable terrain - and a few different map generator modes - few big mountains/many small hills/a web of passages. It would make a bonus to the tactics aspect.
+Click on units to get stats
+Tutorial
+
+
+MUCH LATER
+Diff factions start with diff cash
+AI v AI
+Write seperate display class so a 3D view can be plugged in.
+Unit types - land/sea/air
+Increase map types
+Music
+SFX
+
+
+DIFF UNITS
+Grab enemy units
+Take over enemy units
+Regen
+
+
+CAMPAIGN
+There's a distant planet on the edge of Galactic Federation which is nominally part of it but enjoys almost complete autonomy. The old and wise ruler Teoras has just passed away without a will (at least nobody seems to find it *wink*) leaving his two sons to sort things out between themselves. The first son, Gedric, is more straightforward one who knows how to lead people's hearts, charismatic and therefore has more followers. He's more brave but is too inexperienced so often falls into traps set by his older brother - Bly, who is much more cunning though a bit arrogant and is at a weaker position at start of the game. Legally Bly is in stronger position because he's the eldest son in the family and has nobles support (Though everything is high-tech here, the planet is split be various feudals). Basic units for both factions are the same because it was one army not long ago but now everyone has to choose his allegiance.
+The campaign can be worked around the plot - which should also give many ideas for maps and other ingame stuff.
