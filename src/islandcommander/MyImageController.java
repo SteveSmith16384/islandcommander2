@@ -10,7 +10,7 @@ import ssmith.lang.Functions;
 
 public final class MyImageController extends AppletImageCache implements Runnable {
 	
-	private static final int PCENT_INC = 9;
+	private static final int PCENT_INC = 2;
 
 	private volatile boolean images_loaded = false;
 	private Thread t;
@@ -34,8 +34,6 @@ public final class MyImageController extends AppletImageCache implements Runnabl
 				cacheImage("tank" + i + ".png");
 				cacheImage("silo" + i + ".png");
 
-				percent += PCENT_INC;
-				
 				cacheImage("nuke" + i + ".png");
 				cacheImage("jumper" + i + ".png");
 				cacheImage("trap" + i + ".png");
@@ -43,25 +41,21 @@ public final class MyImageController extends AppletImageCache implements Runnabl
 				cacheImage("tangleweed" + i + ".png");
 				cacheImage("exploder" + i + ".png");
 				cacheImage("sporeshooter" + i + ".png");
-
-				percent += PCENT_INC;
 			}
 			for (int i=0 ; i<4 ; i++) {
 				cacheImage("minerals" + i + ".png");
-				percent += PCENT_INC;
 			}
 
 			cacheImage("desert.png");
-			//percent += PCENT_INC;
 			cacheImage("large07.png");
 
 			// Wait for them all
 			this.mt.waitForAll();
 			if (mt.isErrorAny()) {
-				int err = mt.statusID(0, false);
+				/*int err = mt.statusID(0, false);
 				boolean b = mt.ERRORED == err;
 				b = mt.COMPLETE == err;
-				int fgfg = 5465;
+				int fgfg = 5465;*/
 				throw new RuntimeException("Error loading images");
 			}
 			
@@ -72,8 +66,6 @@ public final class MyImageController extends AppletImageCache implements Runnabl
 				scaleTile("bomber" + i + ".png");
 				scaleTile("tank" + i + ".png");
 				scaleTile("silo" + i + ".png");
-
-				//percent += PCENT_INC;
 				
 				scaleTile("nuke" + i + ".png");
 				scaleTile("jumper" + i + ".png");
@@ -82,19 +74,13 @@ public final class MyImageController extends AppletImageCache implements Runnabl
 				scaleTile("tangleweed" + i + ".png");
 				scaleTile("exploder" + i + ".png");
 				scaleTile("sporeshooter" + i + ".png");
-
-				//percent += PCENT_INC;
 			}
 			
 			for (int i=0 ; i<4 ; i++) {
 				scaleTile("minerals" + i + ".png");
-				//percent += PCENT_INC;
 			}
 
 			scaleTile("desert.png");
-			//percent += PCENT_INC;
-			//cacheImage("large07.png");
-			//percent += PCENT_INC;
 
 			images_loaded = true;
 		} catch (Exception e) {
@@ -107,7 +93,10 @@ public final class MyImageController extends AppletImageCache implements Runnabl
 		filename = Functions.AppendSlash(Main.IMAGE_LOCATION) + filename;
 		Image orig_img = loadImage(filename, false);
 		this.hashImages.put(filename, orig_img);
-	}
+
+		percent += PCENT_INC;
+		
+}
 	
 
 	/*private void scaleTile(String filename) throws MalformedURLException {
@@ -126,6 +115,9 @@ public final class MyImageController extends AppletImageCache implements Runnabl
 		this.hashImages.remove(filename);
 		this.hashImages.put(filename, orig_img);
 		//System.out.println("scaled " + filename);
+		
+		percent += PCENT_INC;
+		
 	}
 
 	
