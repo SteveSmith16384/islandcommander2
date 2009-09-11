@@ -7,47 +7,50 @@ import java.util.Hashtable;
 
 public class AppletImageCache {
 
-	private Hashtable<String, Image> hashImages = new Hashtable<String, Image>();
-	private MediaTracker mt;
+	protected Hashtable<String, Image> hashImages = new Hashtable<String, Image>();
+	protected MediaTracker mt;
 	protected Applet app;
+	//private int id = 0;
 
 	public AppletImageCache(Applet c) {
 		app = c;
 		mt = new MediaTracker(c);
 	}
 
-	public Image loadImage(String filename) {
+	public Image loadImage(String filename, boolean wait) {
 		try {
-			while (true) {
+			//while (true) {
 				Image img = app.getImage(app.getCodeBase(), filename);
 
-				mt.addImage(img, 1);
-				mt.waitForID(1);
-				mt.removeImage(img);
-				
-				if (img.getWidth(app) < 0 || img.getHeight(app) < 0) {
-					if (filename.startsWith("..") == false) {
-						filename = "../" + filename;
-					}
-				} else {
-					return img;
+				mt.addImage(img, 0);
+				if (wait) {
+					mt.waitForID(0); // mt.isErrorAny()
+					mt.removeImage(img);
+
+					/*if (img.getWidth(app) < 0 || img.getHeight(app) < 0) {
+						if (filename.startsWith("..") == false) {
+							filename = "../" + filename;
+						}
+					} else {*/
+					//}
 				}
-			}
+			//}
+				return img;
 		} catch (Exception e) {
 			System.err.println("Error loading images: " + e.getMessage());
 		}
 		return null;
 	}
 
-	public void putImage(String filename, Image img) {
+	/*public void putImage(String filename, Image img) {
 		hashImages.put(filename, img);
-	}
+	}*/
 
-	public Image getImage(String filename) {
+	public Image getImage(String filename, boolean wait) {
 		Image img = (Image)hashImages.get(filename);
 		if (img == null) {
-			img = loadImage(filename);
-			this.putImage(filename, img);
+			img = loadImage(filename, wait);
+			this.hashImages.put(filename, img);
 		}
 		return img;
 	}

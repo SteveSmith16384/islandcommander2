@@ -66,10 +66,10 @@ public class UnitJumper extends GameUnit {
 			if (did_shoot == false) {
 				// Jump!
 				if (jump_interval.hitInterval()) {
-					int max_x = (main.game_data.getMapWidth()) * MapData.SQUARE_SIZE;
-					int max_y = (main.game_data.getMapHeight()) * MapData.SQUARE_SIZE;
-					int new_x = Functions.rnd(10, max_x);
-					int new_y = Functions.rnd(10, max_y);
+					int max_x = (main.game_data.getMapWidth()-1) * MapData.SQUARE_SIZE;
+					int max_y = (main.game_data.getMapHeight()-1) * MapData.SQUARE_SIZE;
+					int new_x = Functions.rnd(MapData.SQUARE_SIZE, max_x);
+					int new_y = Functions.rnd(MapData.SQUARE_SIZE, max_y);
 					int mx = new_x / MapData.SQUARE_SIZE;
 					int my = new_y / MapData.SQUARE_SIZE;
 

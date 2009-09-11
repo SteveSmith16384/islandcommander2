@@ -14,12 +14,10 @@ public final class MyImageController extends AppletImageCache implements Runnabl
 
 	private volatile boolean images_loaded = false;
 	private Thread t;
-	//private Main main;
 	public volatile int percent = 0;
 
 	public MyImageController(Main m, Applet app) {
 		super(app);
-		//main = m;
 		t = new Thread(this, "MyImageController");
 		t.setDaemon(true);
 		t.start();
@@ -28,6 +26,46 @@ public final class MyImageController extends AppletImageCache implements Runnabl
 
 	public void run() {
 		try {
+			// Start all the images loading...
+			for (int i=0 ; i<2 ; i++) {
+				cacheImage("mine" + i + ".png");
+
+				cacheImage("bomber" + i + ".png");
+				cacheImage("tank" + i + ".png");
+				cacheImage("silo" + i + ".png");
+
+				percent += PCENT_INC;
+				
+				cacheImage("nuke" + i + ".png");
+				cacheImage("jumper" + i + ".png");
+				cacheImage("trap" + i + ".png");
+
+				cacheImage("tangleweed" + i + ".png");
+				cacheImage("exploder" + i + ".png");
+				cacheImage("sporeshooter" + i + ".png");
+
+				percent += PCENT_INC;
+			}
+			for (int i=0 ; i<4 ; i++) {
+				cacheImage("minerals" + i + ".png");
+				percent += PCENT_INC;
+			}
+
+			cacheImage("desert.png");
+			//percent += PCENT_INC;
+			cacheImage("large07.png");
+
+			// Wait for them all
+			this.mt.waitForAll();
+			if (mt.isErrorAny()) {
+				int err = mt.statusID(0, false);
+				boolean b = mt.ERRORED == err;
+				b = mt.COMPLETE == err;
+				int fgfg = 5465;
+				throw new RuntimeException("Error loading images");
+			}
+			
+			//Now scale them
 			for (int i=0 ; i<2 ; i++) {
 				scaleTile("mine" + i + ".png");
 
@@ -35,7 +73,7 @@ public final class MyImageController extends AppletImageCache implements Runnabl
 				scaleTile("tank" + i + ".png");
 				scaleTile("silo" + i + ".png");
 
-				percent += PCENT_INC;
+				//percent += PCENT_INC;
 				
 				scaleTile("nuke" + i + ".png");
 				scaleTile("jumper" + i + ".png");
@@ -45,21 +83,21 @@ public final class MyImageController extends AppletImageCache implements Runnabl
 				scaleTile("exploder" + i + ".png");
 				scaleTile("sporeshooter" + i + ".png");
 
-				percent += PCENT_INC;
+				//percent += PCENT_INC;
 			}
 			
 			for (int i=0 ; i<4 ; i++) {
 				scaleTile("minerals" + i + ".png");
-				percent += PCENT_INC;
+				//percent += PCENT_INC;
 			}
 
 			scaleTile("desert.png");
-			percent += PCENT_INC;
-			cacheImage("large07.png");
-			percent += PCENT_INC;
+			//percent += PCENT_INC;
+			//cacheImage("large07.png");
+			//percent += PCENT_INC;
 
 			images_loaded = true;
-		} catch (MalformedURLException e) {
+		} catch (Exception e) {
 			e.printStackTrace();
 		}
 	}
@@ -67,16 +105,26 @@ public final class MyImageController extends AppletImageCache implements Runnabl
 	
 	private void cacheImage(String filename) {
 		filename = Functions.AppendSlash(Main.IMAGE_LOCATION) + filename;
-		Image orig_img = loadImage(filename);
-		putImage(filename, orig_img);
+		Image orig_img = loadImage(filename, false);
+		this.hashImages.put(filename, orig_img);
 	}
 	
 
-	private void scaleTile(String filename) throws MalformedURLException {
+	/*private void scaleTile(String filename) throws MalformedURLException {
 		filename = Functions.AppendSlash(Main.IMAGE_LOCATION) + filename;
-		Image orig_img = loadImage(filename);
+		Image orig_img = loadImage(filename, false);
 		orig_img = ImageFunctions.scaleImage(orig_img, MapData.SQUARE_SIZE, MapData.SQUARE_SIZE, app);
 		putImage(filename, orig_img);
+		//System.out.println("scaled " + filename);
+	}*/
+
+	
+	private void scaleTile(String filename) throws MalformedURLException {
+		filename = Functions.AppendSlash(Main.IMAGE_LOCATION) + filename;
+		Image orig_img = this.hashImages.get(filename);
+		orig_img = ImageFunctions.scaleImage(orig_img, MapData.SQUARE_SIZE, MapData.SQUARE_SIZE, app);
+		this.hashImages.remove(filename);
+		this.hashImages.put(filename, orig_img);
 		//System.out.println("scaled " + filename);
 	}
 

@@ -213,6 +213,7 @@ public final class MasterAI {
 			cost += this.player_attack_units_threat * 2;
 		}
 		if (main.game_data.pdata[side].getCash() >= cost) {
+			if (main.game_data.map_data.map[location.x][location.y].owner == side) {
 			if (main.isAreaClearForNewUnit(location.x * MapData.SQUARE_SIZE, location.y * MapData.SQUARE_SIZE, type)) {
 				UnitStats.CreateUnit(main, type, location.x, location.y, side);
 				main.game_data.pdata[side].addCash(-UnitStats.GetCost(type));
@@ -226,6 +227,7 @@ public final class MasterAI {
 					main.addLogEntry("Area " + top_threat_location + " not clear");
 				}
 			}
+		}
 		}
 		return false;
 	}
