@@ -1,5 +1,4 @@
 Change colours of organactics sprites
-	Don't wait for each image to be loaded!
 
 
 LATER:

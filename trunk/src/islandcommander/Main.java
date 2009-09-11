@@ -31,7 +31,7 @@ public final class Main extends AppletFramework {
 	public static final int APPLET_SIZE = 800;
 	public static final int SEE_MAP_DIST = 250;
 	public static final String TITLE = "Island Commander 2";
-	public static final String VERSION = "v0.43";
+	public static final String VERSION = "v0.44";
 	public static final String IMAGE_LOCATION = "../data/images/";
 	private static final int MAP_SCROLL_SPEED = 15;
 	public static final boolean FOG_OF_WAR = true;
