@@ -31,8 +31,8 @@ public final class Main extends AppletFramework {
 	public static final int APPLET_SIZE = 800;
 	public static final int SEE_MAP_DIST = 250;
 	public static final String TITLE = "Island Commander 2";
-	public static final String VERSION = "v0.42";
-	public static final String IMAGE_LOCATION = "data/images/";
+	public static final String VERSION = "v0.43";
+	public static final String IMAGE_LOCATION = "../data/images/";
 	private static final int MAP_SCROLL_SPEED = 15;
 	public static final boolean FOG_OF_WAR = true;
 
@@ -52,6 +52,7 @@ public final class Main extends AppletFramework {
 
 	public static Font font_large = new Font("Impact", Font.PLAIN, 36);
 	public static Font font_xlarge = new Font("Impact", Font.PLAIN, 72);
+	public static Font font_small = new Font("Impact", Font.PLAIN, 12);
 
 	public volatile ThreadSafeArrayList sprites;
 	private int i_game_stage = STAGE_FIRST_TIME;
@@ -388,6 +389,10 @@ public final class Main extends AppletFramework {
 					icon_panel.paint(g);
 				}
 			}
+			
+			g.setFont(font_small);
+			g.setColor(Color.DARK_GRAY);
+			g.drawString(VERSION, APPLET_SIZE - 50, 20);
 
 			g2.drawImage(this.img_back, 0, 0, this);
 		} catch (Exception e) {
@@ -469,7 +474,7 @@ public final class Main extends AppletFramework {
 	}
 
 	public Image getImage(String fname) {
-		return this.img_cache.getImage(Main.IMAGE_LOCATION + fname);
+		return this.img_cache.getImage(Main.IMAGE_LOCATION + fname, true);
 	}
 
 	public void addIcon(AbstractIcon ic) {

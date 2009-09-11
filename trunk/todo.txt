@@ -1,9 +1,8 @@
 Change colours of organactics sprites
-On IC2: Write you thoughts on the new balance more - it's not something I've been able to grasp - though Jumpers wiped everything out that survived the Nuke.
+	Don't wait for each image to be loaded!
 
 
 LATER:
-Don't wait for each image to be loaded!
 Improve options screen
 Unpassable terrain - and a few different map generator modes - few big mountains/many small hills/a web of passages. It would make a bonus to the tactics aspect.
 Click on units to get stats
