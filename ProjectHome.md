@@ -1,0 +1,1 @@
+Island Commander 2 is a simple single-player RTS playing against an advanced AI.  Once you have created your units however, you don't have any direct control over them.  Your strategy mainly consists of deciding which units to buy and where to place them.  There are several factions to choose from, each with their own unique unit types.
